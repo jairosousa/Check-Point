@@ -1,0 +1,20 @@
+version: '2'
+services:
+    checkpoint-app:
+        image: checkpoint
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://checkpoint-postgresql:5432/checkpoint
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_JEST_URI=http://checkpoint-elasticsearch:9200
+        ports:
+            - 8080:8080
+    checkpoint-postgresql:
+        extends:
+            file: postgresql.yml
+            service: checkpoint-postgresql
+    checkpoint-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: checkpoint-elasticsearch
