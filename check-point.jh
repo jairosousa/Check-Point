@@ -1,0 +1,16 @@
+entity Controle {
+	data LocalDate required,
+    hrEntrada String required,
+    hrAlmocoSaida String,
+    hrAlmocoRetorno String,
+    hrSaida String,
+}
+// Set pagination options
+paginate Controle with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
