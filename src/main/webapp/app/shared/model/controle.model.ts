@@ -7,6 +7,7 @@ export interface IControle {
     hrAlmocoSaida?: string;
     hrAlmocoRetorno?: string;
     hrSaida?: string;
+    corPulseira?: string;
 }
 
 export class Controle implements IControle {
@@ -16,6 +17,7 @@ export class Controle implements IControle {
         public hrEntrada?: string,
         public hrAlmocoSaida?: string,
         public hrAlmocoRetorno?: string,
-        public hrSaida?: string
+        public hrSaida?: string,
+        public corPulseira?: string
     ) {}
 }

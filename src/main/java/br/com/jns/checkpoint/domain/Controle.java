@@ -41,6 +41,9 @@ public class Controle implements Serializable {
     @Column(name = "hr_saida")
     private String hrSaida;
 
+    @Column(name = "cor_pulseira")
+    private String corPulseira;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -114,6 +117,19 @@ public class Controle implements Serializable {
     public void setHrSaida(String hrSaida) {
         this.hrSaida = hrSaida;
     }
+
+    public String getCorPulseira() {
+        return corPulseira;
+    }
+
+    public Controle corPulseira(String corPulseira) {
+        this.corPulseira = corPulseira;
+        return this;
+    }
+
+    public void setCorPulseira(String corPulseira) {
+        this.corPulseira = corPulseira;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -145,6 +161,7 @@ public class Controle implements Serializable {
             ", hrAlmocoSaida='" + getHrAlmocoSaida() + "'" +
             ", hrAlmocoRetorno='" + getHrAlmocoRetorno() + "'" +
             ", hrSaida='" + getHrSaida() + "'" +
+            ", corPulseira='" + getCorPulseira() + "'" +
             "}";
     }
 }

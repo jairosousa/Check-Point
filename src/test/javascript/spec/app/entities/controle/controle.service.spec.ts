@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Controle(0, currentDate, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Controle(0, currentDate, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -74,7 +74,8 @@ describe('Service Tests', () => {
                         hrEntrada: 'BBBBBB',
                         hrAlmocoSaida: 'BBBBBB',
                         hrAlmocoRetorno: 'BBBBBB',
-                        hrSaida: 'BBBBBB'
+                        hrSaida: 'BBBBBB',
+                        corPulseira: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -100,7 +101,8 @@ describe('Service Tests', () => {
                         hrEntrada: 'BBBBBB',
                         hrAlmocoSaida: 'BBBBBB',
                         hrAlmocoRetorno: 'BBBBBB',
-                        hrSaida: 'BBBBBB'
+                        hrSaida: 'BBBBBB',
+                        corPulseira: 'BBBBBB'
                     },
                     elemDefault
                 );
