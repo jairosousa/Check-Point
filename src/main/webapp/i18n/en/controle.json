@@ -20,7 +20,8 @@
             "hrEntrada": "Hr Entrada",
             "hrAlmocoSaida": "Hr Almoco Saida",
             "hrAlmocoRetorno": "Hr Almoco Retorno",
-            "hrSaida": "Hr Saida"
+            "hrSaida": "Hr Saida",
+            "corPulseira": "Cor Pulseira"
         }
     }
 }
