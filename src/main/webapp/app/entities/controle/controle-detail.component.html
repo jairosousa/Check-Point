@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="controle">
+            <h2><span jhiTranslate="checkpointApp.controle.detail.title">Controle</span> {{controle.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="checkpointApp.controle.data">Data</span></dt>
+                <dd>
+                    <span>{{controle.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="checkpointApp.controle.hrEntrada">Hr Entrada</span></dt>
+                <dd>
+                    <span>{{controle.hrEntrada}}</span>
+                </dd>
+                <dt><span jhiTranslate="checkpointApp.controle.hrAlmocoSaida">Hr Almoco Saida</span></dt>
+                <dd>
+                    <span>{{controle.hrAlmocoSaida}}</span>
+                </dd>
+                <dt><span jhiTranslate="checkpointApp.controle.hrAlmocoRetorno">Hr Almoco Retorno</span></dt>
+                <dd>
+                    <span>{{controle.hrAlmocoRetorno}}</span>
+                </dd>
+                <dt><span jhiTranslate="checkpointApp.controle.hrSaida">Hr Saida</span></dt>
+                <dd>
+                    <span>{{controle.hrSaida}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/controle', controle.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

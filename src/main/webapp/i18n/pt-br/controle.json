@@ -1,0 +1,26 @@
+{
+    "checkpointApp": {
+        "controle": {
+            "home": {
+                "title": "Controles",
+                "createLabel": "Criar novo Controle",
+                "createOrEditLabel": "Criar ou editar Controle",
+                "search": "Pesquisar por Controle"
+            },
+            "created": "Um novo Controle foi criado com o identificador {{ param }}",
+            "updated": "Um Controle foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Controle foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Controle {{ id }}?"
+            },
+            "detail": {
+                "title": "Controle"
+            },
+            "data": "Data",
+            "hrEntrada": "Hr Entrada",
+            "hrAlmocoSaida": "Hr Almoco Saida",
+            "hrAlmocoRetorno": "Hr Almoco Retorno",
+            "hrSaida": "Hr Saida"
+        }
+    }
+}

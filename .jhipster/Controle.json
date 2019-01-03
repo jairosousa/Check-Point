@@ -1,0 +1,41 @@
+{
+    "name": "Controle",
+    "fields": [
+        {
+            "fieldName": "data",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "hrEntrada",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "hrAlmocoSaida",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hrAlmocoRetorno",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hrSaida",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190103221423",
+    "entityTableName": "controle",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
