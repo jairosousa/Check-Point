@@ -26,6 +26,10 @@
         {
             "fieldName": "hrSaida",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "corPulseira",
+            "fieldType": "String"
         }
     ],
     "relationships": [],

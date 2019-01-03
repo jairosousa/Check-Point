@@ -66,6 +66,9 @@ public class ControleResourceIntTest {
     private static final String DEFAULT_HR_SAIDA = "AAAAAAAAAA";
     private static final String UPDATED_HR_SAIDA = "BBBBBBBBBB";
 
+    private static final String DEFAULT_COR_PULSEIRA = "AAAAAAAAAA";
+    private static final String UPDATED_COR_PULSEIRA = "BBBBBBBBBB";
+
     @Autowired
     private ControleRepository controleRepository;
 
@@ -126,7 +129,8 @@ public class ControleResourceIntTest {
             .hrEntrada(DEFAULT_HR_ENTRADA)
             .hrAlmocoSaida(DEFAULT_HR_ALMOCO_SAIDA)
             .hrAlmocoRetorno(DEFAULT_HR_ALMOCO_RETORNO)
-            .hrSaida(DEFAULT_HR_SAIDA);
+            .hrSaida(DEFAULT_HR_SAIDA)
+            .corPulseira(DEFAULT_COR_PULSEIRA);
         return controle;
     }
 
@@ -156,6 +160,7 @@ public class ControleResourceIntTest {
         assertThat(testControle.getHrAlmocoSaida()).isEqualTo(DEFAULT_HR_ALMOCO_SAIDA);
         assertThat(testControle.getHrAlmocoRetorno()).isEqualTo(DEFAULT_HR_ALMOCO_RETORNO);
         assertThat(testControle.getHrSaida()).isEqualTo(DEFAULT_HR_SAIDA);
+        assertThat(testControle.getCorPulseira()).isEqualTo(DEFAULT_COR_PULSEIRA);
 
         // Validate the Controle in Elasticsearch
         verify(mockControleSearchRepository, times(1)).save(testControle);
@@ -237,7 +242,8 @@ public class ControleResourceIntTest {
             .andExpect(jsonPath("$.[*].hrEntrada").value(hasItem(DEFAULT_HR_ENTRADA.toString())))
             .andExpect(jsonPath("$.[*].hrAlmocoSaida").value(hasItem(DEFAULT_HR_ALMOCO_SAIDA.toString())))
             .andExpect(jsonPath("$.[*].hrAlmocoRetorno").value(hasItem(DEFAULT_HR_ALMOCO_RETORNO.toString())))
-            .andExpect(jsonPath("$.[*].hrSaida").value(hasItem(DEFAULT_HR_SAIDA.toString())));
+            .andExpect(jsonPath("$.[*].hrSaida").value(hasItem(DEFAULT_HR_SAIDA.toString())))
+            .andExpect(jsonPath("$.[*].corPulseira").value(hasItem(DEFAULT_COR_PULSEIRA.toString())));
     }
     
     @Test
@@ -255,7 +261,8 @@ public class ControleResourceIntTest {
             .andExpect(jsonPath("$.hrEntrada").value(DEFAULT_HR_ENTRADA.toString()))
             .andExpect(jsonPath("$.hrAlmocoSaida").value(DEFAULT_HR_ALMOCO_SAIDA.toString()))
             .andExpect(jsonPath("$.hrAlmocoRetorno").value(DEFAULT_HR_ALMOCO_RETORNO.toString()))
-            .andExpect(jsonPath("$.hrSaida").value(DEFAULT_HR_SAIDA.toString()));
+            .andExpect(jsonPath("$.hrSaida").value(DEFAULT_HR_SAIDA.toString()))
+            .andExpect(jsonPath("$.corPulseira").value(DEFAULT_COR_PULSEIRA.toString()));
     }
 
     @Test
@@ -283,7 +290,8 @@ public class ControleResourceIntTest {
             .hrEntrada(UPDATED_HR_ENTRADA)
             .hrAlmocoSaida(UPDATED_HR_ALMOCO_SAIDA)
             .hrAlmocoRetorno(UPDATED_HR_ALMOCO_RETORNO)
-            .hrSaida(UPDATED_HR_SAIDA);
+            .hrSaida(UPDATED_HR_SAIDA)
+            .corPulseira(UPDATED_COR_PULSEIRA);
         ControleDTO controleDTO = controleMapper.toDto(updatedControle);
 
         restControleMockMvc.perform(put("/api/controles")
@@ -300,6 +308,7 @@ public class ControleResourceIntTest {
         assertThat(testControle.getHrAlmocoSaida()).isEqualTo(UPDATED_HR_ALMOCO_SAIDA);
         assertThat(testControle.getHrAlmocoRetorno()).isEqualTo(UPDATED_HR_ALMOCO_RETORNO);
         assertThat(testControle.getHrSaida()).isEqualTo(UPDATED_HR_SAIDA);
+        assertThat(testControle.getCorPulseira()).isEqualTo(UPDATED_COR_PULSEIRA);
 
         // Validate the Controle in Elasticsearch
         verify(mockControleSearchRepository, times(1)).save(testControle);
@@ -364,7 +373,8 @@ public class ControleResourceIntTest {
             .andExpect(jsonPath("$.[*].hrEntrada").value(hasItem(DEFAULT_HR_ENTRADA)))
             .andExpect(jsonPath("$.[*].hrAlmocoSaida").value(hasItem(DEFAULT_HR_ALMOCO_SAIDA)))
             .andExpect(jsonPath("$.[*].hrAlmocoRetorno").value(hasItem(DEFAULT_HR_ALMOCO_RETORNO)))
-            .andExpect(jsonPath("$.[*].hrSaida").value(hasItem(DEFAULT_HR_SAIDA)));
+            .andExpect(jsonPath("$.[*].hrSaida").value(hasItem(DEFAULT_HR_SAIDA)))
+            .andExpect(jsonPath("$.[*].corPulseira").value(hasItem(DEFAULT_COR_PULSEIRA)));
     }
 
     @Test
