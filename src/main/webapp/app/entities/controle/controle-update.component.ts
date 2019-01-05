@@ -28,7 +28,7 @@ export class ControleUpdateComponent implements OnInit {
             this.controle = controle;
         });
         if (!this.controle.id) {
-            // this.controle.data = moment(moment(), "DD-MM-YYYY");
+            this.controle.data = moment();
             this.controle.corPulseira = '#FFF';
         }
     }
