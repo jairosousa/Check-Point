@@ -27,6 +27,11 @@ Main page styles
         background-size: contain;
     }
 
+    .banner {
+        background: url('../../content/images/banner.png') no-repeat center bottom;
+        height: 75vh;
+    }
+
     .banner div h1 {
         font-size: 1.7em;
     }
