@@ -21,7 +21,7 @@
                                    for="field_data">Data</label>
                             <div class="input-group">
                                 <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker
-                                       #dataDp="ngbDatepicker" [(ngModel)]="controle.data" disabled="controle.id"
+                                       #dataDp="ngbDatepicker" [(ngModel)]="controle.data" [disabled]="controle.id"
                                        required/>
                                 <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon
