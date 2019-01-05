@@ -2,12 +2,15 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-                <h2 id="jhi-controle-heading" jhiTranslate="checkpointApp.controle.home.createOrEditLabel">Create or
+                <h2 *ngIf="currentAction == 'edit'" id="jhi-controle-heading-e" jhiTranslate="checkpointApp.controle.home.editLabel">Create or
                     edit a Controle</h2>
+                <h2 *ngIf="currentAction == 'new'" id="jhi-controle-heading-c" jhiTranslate="checkpointApp.controle.home.createLabel">Create or
+                    edit a Controle</h2>
+                <hr>
                 <div class="form-row">
                     <jhi-alert-error></jhi-alert-error>
 
-                    <div class="form-group" [hidden]="!controle.id">
+                    <div class="form-group" [hidden]="true">
                         <label for="id" jhiTranslate="global.field.id">ID</label>
                         <input type="text" class="form-control" id="id" name="id"
                                [(ngModel)]="controle.id" readonly/>
@@ -18,7 +21,7 @@
                                    for="field_data">Data</label>
                             <div class="input-group">
                                 <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker
-                                       #dataDp="ngbDatepicker" [(ngModel)]="controle.data"
+                                       #dataDp="ngbDatepicker" [(ngModel)]="controle.data" disabled="controle.id"
                                        required/>
                                 <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon

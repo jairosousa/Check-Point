@@ -3,8 +3,9 @@
         "controle": {
             "home": {
                 "title": "Controles",
-                "createLabel": "Controle",
-                "createOrEditLabel": "Criar ou editar Controle",
+                "label": "Controle",
+                "createLabel": "Criar Controle",
+                "editLabel": "Editar Controle",
                 "search": "Pesquisar por Controle"
             },
             "created": "Um novo Controle foi criado com o identificador {{ param }}",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
@@ -13,15 +13,22 @@ import { ControleService } from './controle.service';
     templateUrl: './controle-update.component.html'
 })
 export class ControleUpdateComponent implements OnInit {
+    currentAction: string;
     controle: IControle;
     isSaving: boolean;
     dataDp: any;
 
     horas = ['0:00', '1:00', '', ''];
 
-    constructor(protected controleService: ControleService, protected activatedRoute: ActivatedRoute) {}
+    constructor(
+        protected controleService: ControleService,
+        protected activatedRoute: ActivatedRoute,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
 
     ngOnInit() {
+        this.setCurrentyAction();
         moment.locale('pt-BR');
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ controle }) => {
@@ -58,5 +65,14 @@ export class ControleUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
+    }
+
+    // PRIVATE METHODOS
+    private setCurrentyAction() {
+        if (this.route.snapshot.url[1].path == 'new') {
+            this.currentAction = 'new';
+        } else {
+            this.currentAction = 'edit';
+        }
     }
 }

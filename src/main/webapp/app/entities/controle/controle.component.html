@@ -3,7 +3,7 @@
         <span jhiTranslate="checkpointApp.controle.home.title">Controles</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-controle" [routerLink]="['/controle/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="checkpointApp.controle.home.createLabel">
+            <span class="hidden-sm-down"  jhiTranslate="checkpointApp.controle.home.label">
             Create new Controle
             </span>
         </button>
@@ -50,12 +50,12 @@
                 <td class="text-center"> <div class="box" [ngStyle]="{'background-color': controle.corPulseira}"></div></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/controle', controle.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
+                        <!--<button type="submit"-->
+                                <!--[routerLink]="['/controle', controle.id, 'view' ]"-->
+                                <!--class="btn btn-info btn-sm">-->
+                            <!--<fa-icon [icon]="'eye'"></fa-icon>-->
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
+                        <!--</button>-->
                         <button type="submit"
                                 [routerLink]="['/controle', controle.id, 'edit']"
                                 class="btn btn-primary btn-sm">
