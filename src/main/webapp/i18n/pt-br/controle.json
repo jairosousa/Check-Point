@@ -3,7 +3,7 @@
         "controle": {
             "home": {
                 "title": "Controles",
-                "createLabel": "Criar novo Controle",
+                "createLabel": "Controle",
                 "createOrEditLabel": "Criar ou editar Controle",
                 "search": "Pesquisar por Controle"
             },
@@ -17,10 +17,10 @@
                 "title": "Controle"
             },
             "data": "Data",
-            "hrEntrada": "Hr Entrada",
-            "hrAlmocoSaida": "Hr Almoco Saida",
-            "hrAlmocoRetorno": "Hr Almoco Retorno",
-            "hrSaida": "Hr Saida",
+            "hrEntrada": "Entrada",
+            "hrAlmocoSaida": "Saida",
+            "hrAlmocoRetorno": "Retorno",
+            "hrSaida": "Saída",
             "corPulseira": "Cor Pulseira"
         }
     }

@@ -1,4 +1,4 @@
-<div>
+<div class="card jh-card">
     <h2 id="page-heading">
         <span jhiTranslate="checkpointApp.controle.home.title">Controles</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-controle" [routerLink]="['/controle/new']">
@@ -29,7 +29,7 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
             <th jhiSortBy="data"><span jhiTranslate="checkpointApp.controle.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="hrEntrada"><span jhiTranslate="checkpointApp.controle.hrEntrada">Hr Entrada</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="hrAlmocoSaida"><span jhiTranslate="checkpointApp.controle.hrAlmocoSaida">Hr Almoco Saida</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -41,13 +41,13 @@
             </thead>
             <tbody>
             <tr *ngFor="let controle of controles ;trackBy: trackId">
-                <td><a [routerLink]="['/controle', controle.id, 'view' ]">{{controle.id}}</a></td>
-                <td>{{controle.data | date:'mediumDate'}}</td>
+                <!--<td><a [routerLink]="['/controle', controle.id, 'view' ]">{{controle.id}}</a></td>-->
+                <td>{{controle.data | date:'dd/MM/yyyy'}}</td>
                 <td>{{controle.hrEntrada}}</td>
                 <td>{{controle.hrAlmocoSaida}}</td>
                 <td>{{controle.hrAlmocoRetorno}}</td>
                 <td>{{controle.hrSaida}}</td>
-                <td>{{controle.corPulseira}}</td>
+                <td class="text-center"> <div class="box" [ngStyle]="{'background-color': controle.corPulseira}"></div></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
