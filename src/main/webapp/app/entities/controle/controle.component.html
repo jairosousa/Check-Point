@@ -30,23 +30,23 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="data"><span jhiTranslate="checkpointApp.controle.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hrEntrada"><span jhiTranslate="checkpointApp.controle.hrEntrada">Hr Entrada</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hrAlmocoSaida"><span jhiTranslate="checkpointApp.controle.hrAlmocoSaida">Hr Almoco Saida</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hrAlmocoRetorno"><span jhiTranslate="checkpointApp.controle.hrAlmocoRetorno">Hr Almoco Retorno</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hrSaida"><span jhiTranslate="checkpointApp.controle.hrSaida">Hr Saida</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="corPulseira"><span jhiTranslate="checkpointApp.controle.corPulseira">Cor Pulseira</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="data" class="text-center"><span jhiTranslate="checkpointApp.controle.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hrEntrada" class="text-center"><span jhiTranslate="checkpointApp.controle.hrEntrada">Hr Entrada</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hrAlmocoSaida" class="text-center"><span jhiTranslate="checkpointApp.controle.hrAlmocoSaida">Hr Almoco Saida</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hrAlmocoRetorno" class="text-center"><span jhiTranslate="checkpointApp.controle.hrAlmocoRetorno">Hr Almoco Retorno</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hrSaida" class="text-center"><span jhiTranslate="checkpointApp.controle.hrSaida">Hr Saida</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="corPulseira" class="text-center"><span jhiTranslate="checkpointApp.controle.corPulseira">Cor Pulseira</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let controle of controles ;trackBy: trackId">
                 <!--<td><a [routerLink]="['/controle', controle.id, 'view' ]">{{controle.id}}</a></td>-->
-                <td>{{controle.data | date:'dd/MM/yyyy'}}</td>
-                <td>{{controle.hrEntrada}}</td>
-                <td>{{controle.hrAlmocoSaida}}</td>
-                <td>{{controle.hrAlmocoRetorno}}</td>
-                <td>{{controle.hrSaida}}</td>
+                <td class="text-center">{{controle.data | date:'dd/MM/yyyy'}}</td>
+                <td class="text-center">{{controle.hrEntrada}}</td>
+                <td class="text-center">{{controle.hrAlmocoSaida}}</td>
+                <td class="text-center">{{controle.hrAlmocoRetorno}}</td>
+                <td class="text-center">{{controle.hrSaida}}</td>
                 <td class="text-center"> <div class="box" [ngStyle]="{'background-color': controle.corPulseira}"></div></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
