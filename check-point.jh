@@ -1,10 +1,11 @@
 entity Controle {
-	data LocalDate required,
+	data LocalDate required unique,
     hrEntrada String required,
     hrAlmocoSaida String,
     hrAlmocoRetorno String,
     hrSaida String,
-    corPulseira String
+    corPulseira String, 
+    observacao String
 }
 // Set pagination options
 paginate Controle with pagination
