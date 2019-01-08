@@ -8,8 +8,8 @@
                 "editLabel": "Editar Controle",
                 "search": "Pesquisar por Controle"
             },
-            "created": "Um novo Controle foi criado com o identificador {{ param }}",
-            "updated": "Um Controle foi atualizado com o identificador {{ param }}",
+            "created": "O Controle foi salvo com sucesso!",
+            "updated": "O Controle foi atualizado com sucesso!",
             "deleted": "Um Controle foi deletado com o identificador {{ param }}",
             "delete": {
                 "question": "Tem certeza de que deseja excluir Controle {{ id }}?"
@@ -19,7 +19,7 @@
             },
             "data": "Data",
             "hrEntrada": "Entrada",
-            "hrAlmocoSaida": "Saida",
+            "hrAlmocoSaida": "Almoço",
             "hrAlmocoRetorno": "Retorno",
             "hrSaida": "Saída",
             "corPulseira": "Cor Pulseira"

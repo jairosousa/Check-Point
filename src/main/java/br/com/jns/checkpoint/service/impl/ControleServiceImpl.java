@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,10 +67,9 @@ public class ControleServiceImpl implements ControleService {
     @Transactional(readOnly = true)
     public Page<ControleDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Controles");
-        return controleRepository.findAll(pageable)
+        return controleRepository.findAllByOrderByDataDesc(pageable)
             .map(controleMapper::toDto);
     }
-
 
     /**
      * Get one controle by id.
