@@ -4,7 +4,8 @@ entity Controle {
     hrAlmocoSaida String,
     hrAlmocoRetorno String,
     hrSaida String,
-    corPulseira String
+    corPulseira String, 
+    observacao String
 }
 // Set pagination options
 paginate Controle with pagination
