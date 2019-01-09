@@ -26,6 +26,8 @@ public class ControleDTO implements Serializable {
 
     private String corPulseira;
 
+    private String observacao;
+
     public Long getId() {
         return id;
     }
@@ -82,6 +84,14 @@ public class ControleDTO implements Serializable {
         this.corPulseira = corPulseira;
     }
 
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -113,6 +123,7 @@ public class ControleDTO implements Serializable {
             ", hrAlmocoRetorno='" + getHrAlmocoRetorno() + "'" +
             ", hrSaida='" + getHrSaida() + "'" +
             ", corPulseira='" + getCorPulseira() + "'" +
+            ", observacao='" + getObservacao() + "'" +
             "}";
     }
 }

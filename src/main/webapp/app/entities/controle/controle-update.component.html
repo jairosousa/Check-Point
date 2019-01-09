@@ -1,154 +1,76 @@
-<div class="card jh-card">
-    <div class="row justify-content-center">
-        <div class="col-8">
-            <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-                <h2 *ngIf="currentAction == 'edit'" id="jhi-controle-heading-e" jhiTranslate="checkpointApp.controle.home.editLabel">Create or
-                    edit a Controle</h2>
-                <h2 *ngIf="currentAction == 'new'" id="jhi-controle-heading-c" jhiTranslate="checkpointApp.controle.home.createLabel">Create or
-                    edit a Controle</h2>
-                <hr>
-                <div class="form-row">
-                    <jhi-alert-error></jhi-alert-error>
-
-                    <div class="form-group" [hidden]="true">
-                        <label for="id" jhiTranslate="global.field.id">ID</label>
-                        <input type="text" class="form-control" id="id" name="id"
-                               [(ngModel)]="controle.id" readonly/>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.data"
-                                   for="field_data">Data</label>
-                            <div class="input-group">
-                                <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker
-                                       #dataDp="ngbDatepicker" [(ngModel)]="controle.data" [disabled]="controle.id"
-                                       required/>
-                                <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon
-                                [icon]="'calendar-alt'"></fa-icon></button>
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-controle-heading" jhiTranslate="checkpointApp.controle.home.createOrEditLabel">Create or edit a Controle</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!controle.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="controle.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="checkpointApp.controle.data" for="field_data">Data</label>
+                    <div class="input-group">
+                        <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker  #dataDp="ngbDatepicker" [(ngModel)]="controle.data"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
-                            </div>
-                            <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.data?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                            </div>
-                        </div>
                     </div>
-
+                    <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.data?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <div class="col-md-6">
-
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrEntrada"
-                                   for="field_hrEntrada">Hr Entrada</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-success"><fa-icon icon="clock"
-                                                                            fixedWidth="true"></fa-icon></span>
-                                </div>
-                                <input type="time" class="form-control" name="hrEntrada" id="field_hrEntrada"
-                                       [(ngModel)]="controle.hrEntrada" required/>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-success">H</span>
-                                </div>
-
-                            </div>
-                            <div
-                                [hidden]="!(editForm.controls.hrEntrada?.dirty && editForm.controls.hrEntrada?.invalid)">
-                                <small class="form-text text-danger"
-                                       [hidden]="!editForm.controls.hrEntrada?.errors?.required"
-                                       jhiTranslate="entity.validation.required">
-                                    This field is required.
-                                </small>
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrEntrada" for="field_hrEntrada">Hr Entrada</label>
+                    <input type="text" class="form-control" name="hrEntrada" id="field_hrEntrada"
+                        [(ngModel)]="controle.hrEntrada" required/>
+                    <div [hidden]="!(editForm.controls.hrEntrada?.dirty && editForm.controls.hrEntrada?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.hrEntrada?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrAlmocoSaida"
-                                   for="field_hrAlmocoSaida">Hr Almoco Saida</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-secondary"><fa-icon icon="clock"
-                                                                            fixedWidth="true"></fa-icon></span>
-                                </div>
-                                <input type="time" class="form-control" name="hrAlmocoSaida" id="field_hrAlmocoSaida"
-                                       [(ngModel)]="controle.hrAlmocoSaida"/>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-secondary">H</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrAlmocoRetorno"
-                                   for="field_hrAlmocoRetorno">Hr Almoco Retorno</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><fa-icon icon="clock" fixedWidth="true"></fa-icon></span>
-                                </div>
-                                <input type="time" class="form-control" name="hrAlmocoRetorno"
-                                       id="field_hrAlmocoRetorno"
-                                       [(ngModel)]="controle.hrAlmocoRetorno"/>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">H</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrSaida"
-                                   for="field_hrSaida">Hr Saida</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-primary"><fa-icon icon="clock"
-                                                                            fixedWidth="true"></fa-icon></span>
-                                </div>
-                                <input type="time" class="form-control" name="hrSaida" id="field_hrSaida"
-                                       [(ngModel)]="controle.hrSaida"/>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-primary">H</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-                <div class="form-row">
-                    <div class="col-md-6">
-
-                        <div class="form-group">
-                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.corPulseira"
-                                   for="field_corPulseira">Cor Pulseira</label>
-
-                            <input type="color" class="form-control p-0 border-white" name="corPulseira"
-                                   id="field_corPulseira"
-                                   [(ngModel)]="controle.corPulseira"/>
-                        </div>
-                    </div>
-
-
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrAlmocoSaida" for="field_hrAlmocoSaida">Hr Almoco Saida</label>
+                    <input type="text" class="form-control" name="hrAlmocoSaida" id="field_hrAlmocoSaida"
+                        [(ngModel)]="controle.hrAlmocoSaida" />
                 </div>
-                <div>
-                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
-                        jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>
-                    <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
-                            class="btn btn-primary">
-                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                    </button>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrAlmocoRetorno" for="field_hrAlmocoRetorno">Hr Almoco Retorno</label>
+                    <input type="text" class="form-control" name="hrAlmocoRetorno" id="field_hrAlmocoRetorno"
+                        [(ngModel)]="controle.hrAlmocoRetorno" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrSaida" for="field_hrSaida">Hr Saida</label>
+                    <input type="text" class="form-control" name="hrSaida" id="field_hrSaida"
+                        [(ngModel)]="controle.hrSaida" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="checkpointApp.controle.corPulseira" for="field_corPulseira">Cor Pulseira</label>
+                    <input type="text" class="form-control" name="corPulseira" id="field_corPulseira"
+                        [(ngModel)]="controle.corPulseira" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="checkpointApp.controle.observacao" for="field_observacao">Observacao</label>
+                    <input type="text" class="form-control" name="observacao" id="field_observacao"
+                        [(ngModel)]="controle.observacao" />
                 </div>
 
-            </form>
-        </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
-
-
