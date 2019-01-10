@@ -8,6 +8,7 @@ export interface IControle {
     hrAlmocoRetorno?: string;
     hrSaida?: string;
     corPulseira?: string;
+    observacao?: string;
 }
 
 export class Controle implements IControle {
@@ -18,6 +19,7 @@ export class Controle implements IControle {
         public hrAlmocoSaida?: string,
         public hrAlmocoRetorno?: string,
         public hrSaida?: string,
-        public corPulseira?: string
+        public corPulseira?: string,
+        public observacao?: string
     ) {}
 }

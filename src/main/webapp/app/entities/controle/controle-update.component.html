@@ -2,9 +2,11 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-                <h2 *ngIf="currentAction == 'edit'" id="jhi-controle-heading-e" jhiTranslate="checkpointApp.controle.home.editLabel">Create or
+                <h2 *ngIf="currentAction == 'edit'" id="jhi-controle-heading-e"
+                    jhiTranslate="checkpointApp.controle.home.editLabel">Create or
                     edit a Controle</h2>
-                <h2 *ngIf="currentAction == 'new'" id="jhi-controle-heading-c" jhiTranslate="checkpointApp.controle.home.createLabel">Create or
+                <h2 *ngIf="currentAction == 'new'" id="jhi-controle-heading-c"
+                    jhiTranslate="checkpointApp.controle.home.createLabel">Create or
                     edit a Controle</h2>
                 <hr>
                 <div class="form-row">
@@ -48,7 +50,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-success"><fa-icon icon="clock"
-                                                                            fixedWidth="true"></fa-icon></span>
+                                                                                         fixedWidth="true"></fa-icon></span>
                                 </div>
                                 <input type="time" class="form-control" name="hrEntrada" id="field_hrEntrada"
                                        [(ngModel)]="controle.hrEntrada" required/>
@@ -74,7 +76,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-secondary"><fa-icon icon="clock"
-                                                                            fixedWidth="true"></fa-icon></span>
+                                                                                           fixedWidth="true"></fa-icon></span>
                                 </div>
                                 <input type="time" class="form-control" name="hrAlmocoSaida" id="field_hrAlmocoSaida"
                                        [(ngModel)]="controle.hrAlmocoSaida"/>
@@ -90,7 +92,8 @@
                                    for="field_hrAlmocoRetorno">Hr Almoco Retorno</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><fa-icon icon="clock" fixedWidth="true"></fa-icon></span>
+                                    <span class="input-group-text"><fa-icon icon="clock"
+                                                                            fixedWidth="true"></fa-icon></span>
                                 </div>
                                 <input type="time" class="form-control" name="hrAlmocoRetorno"
                                        id="field_hrAlmocoRetorno"
@@ -108,7 +111,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text text-primary"><fa-icon icon="clock"
-                                                                            fixedWidth="true"></fa-icon></span>
+                                                                                         fixedWidth="true"></fa-icon></span>
                                 </div>
                                 <input type="time" class="form-control" name="hrSaida" id="field_hrSaida"
                                        [(ngModel)]="controle.hrSaida"/>
@@ -116,6 +119,15 @@
                                     <span class="input-group-text text-primary">H</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.observacao"
+                                   for="field_observacao">Observacao</label>
+                            <input type="text" class="form-control" name="observacao" id="field_observacao"
+                                   [(ngModel)]="controle.observacao"/>
                         </div>
                     </div>
 

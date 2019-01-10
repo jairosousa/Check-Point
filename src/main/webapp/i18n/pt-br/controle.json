@@ -10,7 +10,7 @@
             },
             "created": "O Controle foi salvo com sucesso!",
             "updated": "O Controle foi atualizado com sucesso!",
-            "deleted": "Um Controle foi deletado com o identificador {{ param }}",
+            "deleted": "O Controle foi excluido com sucesso!",
             "delete": {
                 "question": "Tem certeza de que deseja excluir Controle {{ id }}?"
             },
@@ -22,7 +22,8 @@
             "hrAlmocoSaida": "Almoço",
             "hrAlmocoRetorno": "Retorno",
             "hrSaida": "Saída",
-            "corPulseira": "Cor Pulseira"
+            "corPulseira": "Cor Pulseira",
+            "observacao": "Observação"
         }
     }
 }

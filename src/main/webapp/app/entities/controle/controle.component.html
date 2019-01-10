@@ -36,18 +36,24 @@
             <th jhiSortBy="hrAlmocoRetorno" class="text-center"><span jhiTranslate="checkpointApp.controle.hrAlmocoRetorno">Hr Almoco Retorno</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="hrSaida" class="text-center"><span jhiTranslate="checkpointApp.controle.hrSaida">Hr Saida</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="corPulseira" class="text-center"><span jhiTranslate="checkpointApp.controle.corPulseira">Cor Pulseira</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="observacao"><span jhiTranslate="checkpointApp.controle.observacao">Observacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let controle of controles ;trackBy: trackId">
                 <!--<td><a [routerLink]="['/controle', controle.id, 'view' ]">{{controle.id}}</a></td>-->
-                <td class="text-center">{{controle.data | date:'dd/MM/yyyy'}}</td>
+                <td class="text-center">
+                    <a [routerLink]="['/controle', controle.id, 'edit']">
+                        {{controle.data | date:'dd/MM/yyyy'}}
+                    </a>
+                    </td>
                 <td class="text-center">{{controle.hrEntrada}}</td>
                 <td class="text-center">{{controle.hrAlmocoSaida}}</td>
                 <td class="text-center">{{controle.hrAlmocoRetorno}}</td>
                 <td class="text-center">{{controle.hrSaida}}</td>
                 <td class="text-center"> <div class="box" [ngStyle]="{'background-color': controle.corPulseira}"></div></td>
+                <td>{{controle.observacao}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <!--<button type="submit"-->
@@ -56,12 +62,12 @@
                             <!--<fa-icon [icon]="'eye'"></fa-icon>-->
                             <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
                         <!--</button>-->
-                        <button type="submit"
-                                [routerLink]="['/controle', controle.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+                        <!--<button type="submit"-->
+                                <!--[routerLink]="['/controle', controle.id, 'edit']"-->
+                                <!--class="btn btn-primary btn-sm">-->
+                            <!--<fa-icon [icon]="'pencil-alt'"></fa-icon>-->
+                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
+                        <!--</button>-->
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'controle/'+ controle.id + '/delete'} }]"
                                 replaceUrl="true"

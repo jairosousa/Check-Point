@@ -2,26 +2,28 @@
     "checkpointApp": {
         "controle": {
             "home": {
-                "title": "Controles",
-                "createLabel": "Create a new Controle",
-                "createOrEditLabel": "Create or edit a Controle",
-                "search": "Search for Controle"
+                "title": "Controls",
+                "label": "Control",
+                "createLabel": "New Control",
+                "editLabel": "Edit Controle",
+                "search": "Search for Control"
             },
-            "created": "A new Controle is created with identifier {{ param }}",
-            "updated": "A Controle is updated with identifier {{ param }}",
-            "deleted": "A Controle is deleted with identifier {{ param }}",
+            "created": "The Control has been saved successfully!",
+            "updated": "The Control has been updated successfully!",
+            "deleted": "Control has been successfully deleted!",
             "delete": {
-                "question": "Are you sure you want to delete Controle {{ id }}?"
+                "question": "Are you sure you want to delete Control {{ id }}?"
             },
             "detail": {
-                "title": "Controle"
+                "title": "Control"
             },
-            "data": "Data",
-            "hrEntrada": "Hr Entrada",
-            "hrAlmocoSaida": "Hr Almoco Saida",
-            "hrAlmocoRetorno": "Hr Almoco Retorno",
-            "hrSaida": "Hr Saida",
-            "corPulseira": "Cor Pulseira"
+            "data": "Date",
+            "hrEntrada": "Entry",
+            "hrAlmocoSaida": "Lunch",
+            "hrAlmocoRetorno": "Return",
+            "hrSaida": "Exit",
+            "corPulseira": "Color Bracelet",
+            "observacao": "Note"
         }
     }
 }

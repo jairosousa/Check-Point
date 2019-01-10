@@ -29,6 +29,10 @@
         },
         {
             "fieldName": "corPulseira",
+            "fieldType": "String",
+        },
+        {
+            "fieldName": "observacao",
             "fieldType": "String"
         }
     ],
