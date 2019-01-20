@@ -1,14 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 
 import { IControle } from 'app/shared/model/controle.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ControleService } from './controle.service';
+
+import * as jsPDF from 'jspdf';
+import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-controle',
@@ -30,6 +33,8 @@ export class ControleComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+
+    pdf = faFilePdf;
 
     constructor(
         protected controleService: ControleService,
@@ -166,5 +171,47 @@ export class ControleComponent implements OnInit, OnDestroy {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    gerarPDF() {
+        const doc = new jsPDF();
+        doc.setProperties({
+            title: 'controle-ponto'
+        });
+        doc.setFont('Courier');
+        doc.setFontStyle('bold');
+        doc.setFontSize(20);
+        doc.text('Controle de Ponto', 105, 20, null, null, 'center');
+        doc.line(78, 24, 133, 24);
+
+        doc.setFontSize(12);
+        doc.text('Data', 15, 40);
+        doc.text('Entrada', 43, 40);
+        doc.text('Almoço', 65, 40);
+        doc.text('Retorno', 83, 40);
+        doc.text('Saída', 103, 40);
+        doc.text('Observação', 120, 40);
+
+        doc.line(15, 42, 140, 42);
+
+        let y = 47;
+        this.controles.forEach(controle => {
+            const observacao = !controle.observacao ? '' : controle.observacao;
+            doc.text(this.formatData(controle.data), 15, y);
+            doc.text(`${controle.hrEntrada}`, 44, y);
+            doc.text(`${controle.hrAlmocoSaida}`, 66, y);
+            doc.text(`${controle.hrAlmocoRetorno}`, 84, y);
+            doc.text(`${controle.hrSaida}`, 103, y);
+            doc.text(observacao, 120, y);
+            y += 7;
+        });
+
+        doc.output('dataurlnewwindow');
+    }
+
+    private formatData(data: any): string {
+        const dia = data.date() < 10 ? '0' + data.date() : data.date();
+        const mes = data.month() + 1 < 10 ? '0' + (data.month() + 1) : data.month() + 1;
+        return `${dia}/${mes}/${data.year()}`;
     }
 }

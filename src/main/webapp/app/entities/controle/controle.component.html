@@ -25,6 +25,12 @@
         </div>
     </div>
     <br/>
+    <button type="button"
+        (click)="gerarPDF()"
+        class="btn btn-info btn-sm">
+        <fa-icon [icon]="pdf"></fa-icon>
+        <span class="d-none d-md-inline" jhiTranslate="entity.action.pdf">pdf</span>
+    </button>
     <div class="table-responsive" *ngIf="controles">
         <table class="table table-striped">
             <thead>
