@@ -1,23 +1,22 @@
 package br.com.jns.checkpoint.service.impl;
 
-import br.com.jns.checkpoint.service.ControleService;
 import br.com.jns.checkpoint.domain.Controle;
 import br.com.jns.checkpoint.repository.ControleRepository;
+import br.com.jns.checkpoint.repository.filter.ControleFilter;
 import br.com.jns.checkpoint.repository.search.ControleSearchRepository;
+import br.com.jns.checkpoint.service.ControleService;
 import br.com.jns.checkpoint.service.dto.ControleDTO;
 import br.com.jns.checkpoint.service.mapper.ControleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Controle.
@@ -100,7 +99,7 @@ public class ControleServiceImpl implements ControleService {
     /**
      * Search for the controle corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */
@@ -109,6 +108,12 @@ public class ControleServiceImpl implements ControleService {
     public Page<ControleDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Controles for query {}", query);
         return controleSearchRepository.search(queryStringQuery(query), pageable)
+            .map(controleMapper::toDto);
+    }
+
+    @Override
+    public Page<ControleDTO> filtrar(ControleFilter filter, Pageable pageable) {
+        return controleRepository.filtrar(filter, pageable)
             .map(controleMapper::toDto);
     }
 }

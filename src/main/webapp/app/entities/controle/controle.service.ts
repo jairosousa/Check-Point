@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
+import { Moment } from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
@@ -11,6 +12,11 @@ import { IControle } from 'app/shared/model/controle.model';
 
 type EntityResponseType = HttpResponse<IControle>;
 type EntityArrayResponseType = HttpResponse<IControle[]>;
+
+export class ControleFiltro {
+    dataVencimentoInicio: Moment;
+    dataVencimentoFim: Moment;
+}
 
 @Injectable({ providedIn: 'root' })
 export class ControleService {
@@ -39,8 +45,8 @@ export class ControleService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
-    query(req?: any): Observable<EntityArrayResponseType> {
-        const options = createRequestOption(req);
+    query(req?: any, filtro?: ControleFiltro): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req, filtro);
         return this.http
             .get<IControle[]>(this.resourceUrl, { params: options, observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));

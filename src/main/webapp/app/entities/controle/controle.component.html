@@ -1,49 +1,153 @@
 <div class="card jh-card">
     <h2 id="page-heading">
-        <span jhiTranslate="checkpointApp.controle.home.title">Controles</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-controle" [routerLink]="['/controle/new']">
+        <fa-icon [icon]="clock"></fa-icon>&nbsp;
+        <span class="my-sm-5" jhiTranslate="checkpointApp.controle.home.title">Controles</span>
+
+        <button id="jh-create-entity" class="btn btn-primary m-sm-3 float-right jh-create-entity create-controle"
+                [routerLink]="['/controle/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="checkpointApp.controle.home.label">
+            <span class="hidden-sm-down" jhiTranslate="checkpointApp.controle.home.label">
             Create new Controle
             </span>
         </button>
+        <button type="button" class="btn btn-outline-primary float-right mr-5" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapseExample" [ngbTooltip]="tipContent">
+            <fa-icon [icon]="'search'"></fa-icon>
+        </button>
     </h2>
+
+    <ng-template #tipContent>
+        <b>Pesquisar</b>
+    </ng-template>
+
     <jhi-alert></jhi-alert>
     <div class="row">
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'checkpointApp.controle.home.search' | translate }}">
-                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
-                        <fa-icon [icon]="'search'"></fa-icon>
-                    </button>
-                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <fa-icon [icon]="'trash-alt'"></fa-icon>
-                    </button>
+                    <!--<input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"-->
+                           <!--name="currentSearch" placeholder="{{ 'checkpointApp.controle.home.search' | translate }}">-->
+                    <!--<button class="input-group-append btn btn-info" (click)="search(currentSearch)">-->
+                        <!--<fa-icon [icon]="'search'"></fa-icon>-->
+                    <!--</button>-->
+                    <!--<button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">-->
+                        <!--<fa-icon [icon]="'trash-alt'"></fa-icon>-->
+                    <!--</button>-->
+
+
                 </div>
             </form>
         </div>
     </div>
     <br/>
-    <button type="button"
-        (click)="gerarPDF()"
-        class="btn btn-info btn-sm">
-        <fa-icon [icon]="pdf"></fa-icon>
-        <span class="d-none d-md-inline" jhiTranslate="entity.action.pdf">pdf</span>
-    </button>
+
+    <div id="collapseExample" [ngbCollapse]="!isCollapsed" class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-6">Pesquisar por data</h1>
+            <form name="editForm" (ngSubmit)="loadAll()" #editForm="ngForm">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.datade"
+                                   for="field_data">Data</label>
+                            <div class="input-group">
+                                <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker
+                                       #dataDpi="ngbDatepicker" [(ngModel)]="filtro.dataVencimentoInicio"
+                                       required/>
+                                <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataDpi.toggle()"><fa-icon
+                                [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                            </div>
+                            <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.data?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="checkpointApp.controle.datafim"
+                                   for="field_data">Data</label>
+                            <div class="input-group">
+                                <input id="field_data-fim" type="text" class="form-control" name="data" ngbDatepicker
+                                       #dataDp="ngbDatepicker" [(ngModel)]="filtro.dataVencimentoFim"
+                                       />
+                                <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon
+                                [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                            </div>
+                            <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.data?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" [disabled]="editForm.form.invalid"
+                            class="btn btn-primary mr-2">
+                        <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.buscar">Save</span>
+                    </button>
+
+                    <button type="button"
+                               (click)="clean(editForm)"
+                            class="btn btn-dark mr-2">
+                        <fa-icon [icon]="undo"></fa-icon>&nbsp;<span jhiTranslate="entity.action.limpar">Save</span>
+                    </button>
+
+                    <button type="button"
+                            (click)="gerarPDF()"
+                            class="btn btn-danger btn-sm">
+                        <fa-icon [icon]="pdf"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.pdf">pdf</span>
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <div class="table-responsive" *ngIf="controles">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-            <th jhiSortBy="data" class="text-center"><span jhiTranslate="checkpointApp.controle.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hrEntrada" class="text-center"><span jhiTranslate="checkpointApp.controle.hrEntrada">Hr Entrada</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hrAlmocoSaida" class="text-center"><span jhiTranslate="checkpointApp.controle.hrAlmocoSaida">Hr Almoco Saida</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hrAlmocoRetorno" class="text-center"><span jhiTranslate="checkpointApp.controle.hrAlmocoRetorno">Hr Almoco Retorno</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="hrSaida" class="text-center"><span jhiTranslate="checkpointApp.controle.hrSaida">Hr Saida</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="corPulseira" class="text-center"><span jhiTranslate="checkpointApp.controle.corPulseira">Cor Pulseira</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="observacao"><span jhiTranslate="checkpointApp.controle.observacao">Observacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
+                <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+                <th jhiSortBy="data" class="text-center"><span jhiTranslate="checkpointApp.controle.data">Data</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="hrEntrada" class="text-center"><span jhiTranslate="checkpointApp.controle.hrEntrada">Hr Entrada</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="hrAlmocoSaida" class="text-center"><span
+                    jhiTranslate="checkpointApp.controle.hrAlmocoSaida">Hr Almoco Saida</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="hrAlmocoRetorno" class="text-center"><span
+                    jhiTranslate="checkpointApp.controle.hrAlmocoRetorno">Hr Almoco Retorno</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="hrSaida" class="text-center"><span
+                    jhiTranslate="checkpointApp.controle.hrSaida">Hr Saida</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="corPulseira" class="text-center"><span jhiTranslate="checkpointApp.controle.corPulseira">Cor Pulseira</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th jhiSortBy="observacao"><span jhiTranslate="checkpointApp.controle.observacao">Observacao</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -53,26 +157,28 @@
                     <a [routerLink]="['/controle', controle.id, 'edit']">
                         {{controle.data | date:'dd/MM/yyyy'}}
                     </a>
-                    </td>
+                </td>
                 <td class="text-center">{{controle.hrEntrada}}</td>
                 <td class="text-center">{{controle.hrAlmocoSaida}}</td>
                 <td class="text-center">{{controle.hrAlmocoRetorno}}</td>
                 <td class="text-center">{{controle.hrSaida}}</td>
-                <td class="text-center"> <div class="box" [ngStyle]="{'background-color': controle.corPulseira}"></div></td>
+                <td class="text-center">
+                    <div class="box" [ngStyle]="{'background-color': controle.corPulseira}"></div>
+                </td>
                 <td>{{controle.observacao}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <!--<button type="submit"-->
-                                <!--[routerLink]="['/controle', controle.id, 'view' ]"-->
-                                <!--class="btn btn-info btn-sm">-->
-                            <!--<fa-icon [icon]="'eye'"></fa-icon>-->
-                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
+                        <!--[routerLink]="['/controle', controle.id, 'view' ]"-->
+                        <!--class="btn btn-info btn-sm">-->
+                        <!--<fa-icon [icon]="'eye'"></fa-icon>-->
+                        <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
                         <!--</button>-->
                         <!--<button type="submit"-->
-                                <!--[routerLink]="['/controle', controle.id, 'edit']"-->
-                                <!--class="btn btn-primary btn-sm">-->
-                            <!--<fa-icon [icon]="'pencil-alt'"></fa-icon>-->
-                            <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
+                        <!--[routerLink]="['/controle', controle.id, 'edit']"-->
+                        <!--class="btn btn-primary btn-sm">-->
+                        <!--<fa-icon [icon]="'pencil-alt'"></fa-icon>-->
+                        <!--<span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>-->
                         <!--</button>-->
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'controle/'+ controle.id + '/delete'} }]"
@@ -90,10 +196,12 @@
     </div>
     <div *ngIf="controles && controles.length">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
         </div>
     </div>
 </div>

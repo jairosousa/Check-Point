@@ -1,5 +1,6 @@
 package br.com.jns.checkpoint.web.rest;
 
+import br.com.jns.checkpoint.repository.filter.ControleFilter;
 import com.codahale.metrics.annotation.Timed;
 import br.com.jns.checkpoint.service.ControleService;
 import br.com.jns.checkpoint.web.rest.errors.BadRequestAlertException;
@@ -91,11 +92,20 @@ public class ControleResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of controles in body
      */
+//    @GetMapping("/controles")
+//    @Timed
+//    public ResponseEntity<List<ControleDTO>> getAllControles(Pageable pageable) {
+//        log.debug("REST request to get a page of Controles");
+//        Page<ControleDTO> page = controleService.findAll(pageable);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/controles");
+//        return ResponseEntity.ok().headers(headers).body(page.getContent());
+//    }
+
     @GetMapping("/controles")
     @Timed
-    public ResponseEntity<List<ControleDTO>> getAllControles(Pageable pageable) {
+    public ResponseEntity<List<ControleDTO>> pesquisar(ControleFilter filter, Pageable pageable) {
         log.debug("REST request to get a page of Controles");
-        Page<ControleDTO> page = controleService.findAll(pageable);
+        Page<ControleDTO> page = controleService.filtrar(filter, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/controles");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

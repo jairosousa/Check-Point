@@ -8,10 +8,12 @@ import { IControle } from 'app/shared/model/controle.model';
 import { AccountService } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
-import { ControleService } from './controle.service';
+import { ControleFiltro, ControleService } from './controle.service';
 
 import * as jsPDF from 'jspdf';
-import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { NgForm } from '@angular/forms';
+import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
 
 @Component({
     selector: 'jhi-controle',
@@ -35,6 +37,10 @@ export class ControleComponent implements OnInit, OnDestroy {
     reverse: any;
 
     pdf = faFilePdf;
+    undo = faUndo;
+    clock = faClock;
+
+    filtro = new ControleFiltro();
 
     constructor(
         protected controleService: ControleService,
@@ -74,11 +80,14 @@ export class ControleComponent implements OnInit, OnDestroy {
             return;
         }
         this.controleService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
+            .query(
+                {
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    sort: this.sort()
+                },
+                this.filtro
+            )
             .subscribe(
                 (res: HttpResponse<IControle[]>) => this.paginateControles(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
@@ -171,6 +180,11 @@ export class ControleComponent implements OnInit, OnDestroy {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    clean(editForm: NgForm) {
+        editForm.resetForm();
+        this.loadAll();
     }
 
     gerarPDF() {

@@ -99,6 +99,8 @@
             "edit": "Editar",
             "open": "Open",
             "save": "Salvar",
+            "buscar": "Buscar",
+            "limpar": "Limpar",
             "view": "Visualizar",
             "pdf": "Gerar PDF"
         },

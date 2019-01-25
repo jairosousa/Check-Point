@@ -1,5 +1,6 @@
 package br.com.jns.checkpoint.service;
 
+import br.com.jns.checkpoint.repository.filter.ControleFilter;
 import br.com.jns.checkpoint.service.dto.ControleDTO;
 
 import org.springframework.data.domain.Page;
@@ -53,4 +54,6 @@ public interface ControleService {
      * @return the list of entities
      */
     Page<ControleDTO> search(String query, Pageable pageable);
+
+    Page<ControleDTO> filtrar(ControleFilter filter, Pageable pageable);
 }

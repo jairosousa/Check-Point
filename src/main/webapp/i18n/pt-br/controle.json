@@ -2,7 +2,7 @@
     "checkpointApp": {
         "controle": {
             "home": {
-                "title": "Controles",
+                "title": "Controle de Ponto",
                 "label": "Controle",
                 "createLabel": "Criar Controle",
                 "editLabel": "Editar Controle",
@@ -18,6 +18,8 @@
                 "title": "Controle"
             },
             "data": "Data",
+            "datade": "Data inicio",
+            "datafim": "Data fim",
             "hrEntrada": "Entrada",
             "hrAlmocoSaida": "Almoço",
             "hrAlmocoRetorno": "Retorno",
