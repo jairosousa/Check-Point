@@ -40,6 +40,8 @@ export class ControleComponent implements OnInit, OnDestroy {
     undo = faUndo;
     clock = faClock;
 
+    isCollapsed: any;
+
     filtro = new ControleFiltro();
 
     constructor(
