@@ -3,14 +3,14 @@
         <fa-icon [icon]="clock"></fa-icon>&nbsp;
         <span class="my-sm-5" jhiTranslate="checkpointApp.controle.home.title">Controles</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-controle"
-                [routerLink]="['/controle/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right ml-3 jh-create-entity create-controle"
+                [routerLink]="['/controle/new']" [ngbTooltip]="tipCreate">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down" jhiTranslate="checkpointApp.controle.home.label">
-            Create new Controle
-            </span>
+            <!--<span class="hidden-sm-down" jhiTranslate="checkpointApp.controle.home.label">-->
+            <!--Create new Controle-->
+            <!--</span>-->
         </button>
-        <button type="button" class="btn btn-outline-primary float-right mr-5 my-sm-5" (click)="isCollapsed = !isCollapsed"
+        <button type="button" class="btn btn-outline-primary float-right" (click)="isCollapsed = !isCollapsed"
                 [attr.aria-expanded]="!isCollapsed"
                 aria-controls="collapseExample" [ngbTooltip]="tipContent">
             <fa-icon [icon]="'search'"></fa-icon>
@@ -18,7 +18,11 @@
     </h2>
 
     <ng-template #tipContent>
-        <b>Pesquisar</b>
+        <b jhiTranslate="checkpointApp.controle.home.search">Pesquisar</b>
+    </ng-template>
+
+    <ng-template #tipCreate>
+        <b jhiTranslate="checkpointApp.controle.home.label">Controle</b>
     </ng-template>
 
     <jhi-alert></jhi-alert>
@@ -96,18 +100,18 @@
 
                     <button type="submit" [disabled]="editForm.form.invalid"
                             class="btn btn-primary mr-2">
-                        <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.buscar">Save</span>
+                        <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="entity.action.buscar">Save</span>
                     </button>
 
                     <button type="button"
                                (click)="clean(editForm)"
                             class="btn btn-dark mr-2">
-                        <fa-icon [icon]="undo"></fa-icon>&nbsp;<span jhiTranslate="entity.action.limpar">Save</span>
+                        <fa-icon [icon]="undo"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="entity.action.limpar">Save</span>
                     </button>
 
                     <button type="button"
                             (click)="gerarPDF()"
-                            class="btn btn-danger btn-sm">
+                            class="btn btn-danger">
                         <fa-icon [icon]="pdf"></fa-icon>
                         <span class="d-none d-md-inline" jhiTranslate="entity.action.pdf">pdf</span>
                     </button>
