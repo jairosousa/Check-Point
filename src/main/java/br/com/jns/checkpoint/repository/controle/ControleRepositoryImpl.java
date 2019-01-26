@@ -34,6 +34,8 @@ public class ControleRepositoryImpl implements ControleRepositoryQuery {
 
         criteria.where(predicates);
 
+        criteria.orderBy(builder.desc(root.get(Controle_.data)));
+
         TypedQuery<Controle> query = manager.createQuery(criteria);
         adicionarRestricoesDePaginacao(query, pageable);
 

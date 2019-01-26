@@ -210,8 +210,10 @@ export class ControleComponent implements OnInit, OnDestroy {
 
         doc.line(15, 42, 140, 42);
 
+        const controlesRev = this.controles.reverse();
+
         let y = 47;
-        this.controles.forEach(controle => {
+        controlesRev.forEach(controle => {
             const observacao = !controle.observacao ? '' : controle.observacao;
             doc.text(this.formatData(controle.data), 15, y);
             doc.text(`${controle.hrEntrada}`, 44, y);

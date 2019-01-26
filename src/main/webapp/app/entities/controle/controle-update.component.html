@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-6">
-
+                        <i class="glyphicon-refresh"></i>
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="checkpointApp.controle.hrEntrada"
                                    for="field_hrEntrada">Hr Entrada</label>
@@ -54,8 +54,9 @@
                                 </div>
                                 <input type="time" class="form-control" name="hrEntrada" id="field_hrEntrada"
                                        [(ngModel)]="controle.hrEntrada" required/>
-                                <div class="input-group-prepend">
+                                <div class=" input-group-prepend">
                                     <span class="input-group-text text-success">H</span>
+
                                 </div>
 
                             </div>
@@ -139,7 +140,7 @@
                             <label class="form-control-label" jhiTranslate="checkpointApp.controle.corPulseira"
                                    for="field_corPulseira">Cor Pulseira</label>
 
-                            <input type="color" class="form-control p-0 border-white" name="corPulseira"
+                            <input type="color" class="form-control p-2" name="corPulseira"
                                    id="field_corPulseira"
                                    [(ngModel)]="controle.corPulseira"/>
                         </div>
