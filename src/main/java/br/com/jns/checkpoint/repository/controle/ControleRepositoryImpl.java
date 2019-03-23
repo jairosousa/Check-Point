@@ -67,6 +67,8 @@ public class ControleRepositoryImpl implements ControleRepositoryQuery {
     private Predicate[] criarRestricoes(ControleFilter filter, CriteriaBuilder builder, Root<Controle> root) {
         List<Predicate> predicates = new ArrayList<>();
 
+        System.out.println(filter.toString());
+
         if (!StringUtils.isEmpty(filter.getDataVencimentoDe())) {
             predicates.add(builder.greaterThanOrEqualTo(root.get(Controle_.data),
                 filter.getDataVencimentoDe()));
@@ -81,4 +83,23 @@ public class ControleRepositoryImpl implements ControleRepositoryQuery {
         }
         return predicates.toArray(new Predicate[predicates.size()]);
     }
+
+    @Override
+    public List<Controle> findGerarPdf(ControleFilter filter) {
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<Controle> criteria = builder.createQuery(Controle.class);
+        Root<Controle> root = criteria.from(Controle.class);
+
+//        Criar Restriçoes
+        Predicate[] predicates = criarRestricoes(filter, builder, root);
+
+        criteria.where(predicates);
+
+        criteria.orderBy(builder.desc(root.get(Controle_.data)));
+
+        TypedQuery<Controle> query = manager.createQuery(criteria);
+
+        return query.getResultList();
+    }
+
 }

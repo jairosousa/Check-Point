@@ -190,41 +190,49 @@ export class ControleComponent implements OnInit, OnDestroy {
     }
 
     gerarPDF() {
-        const doc = new jsPDF();
-        doc.setProperties({
-            title: 'controle-ponto'
-        });
-        doc.setFont('Courier');
-        doc.setFontStyle('bold');
-        doc.setFontSize(20);
-        doc.text('Controle de Ponto', 105, 20, null, null, 'center');
-        doc.line(78, 24, 133, 24);
+        this.controleService
+            .queryPdf(this.filtro)
+            .subscribe(
+                (res: HttpResponse<IControle[]>) => this.paginateControles(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        return;
 
-        doc.setFontSize(12);
-        doc.text('Data', 15, 40);
-        doc.text('Entrada', 43, 40);
-        doc.text('Almoço', 65, 40);
-        doc.text('Retorno', 83, 40);
-        doc.text('Saída', 103, 40);
-        doc.text('Observação', 120, 40);
-
-        doc.line(15, 42, 140, 42);
-
-        const controlesRev = this.controles.reverse();
-
-        let y = 47;
-        controlesRev.forEach(controle => {
-            const observacao = !controle.observacao ? '' : controle.observacao;
-            doc.text(this.formatData(controle.data), 15, y);
-            doc.text(`${controle.hrEntrada}`, 44, y);
-            doc.text(`${controle.hrAlmocoSaida}`, 66, y);
-            doc.text(`${controle.hrAlmocoRetorno}`, 84, y);
-            doc.text(`${controle.hrSaida}`, 103, y);
-            doc.text(observacao, 120, y);
-            y += 7;
-        });
-
-        doc.output('dataurlnewwindow');
+        // const doc = new jsPDF();
+        // doc.setProperties({
+        //     title: 'controle-ponto'
+        // });
+        // doc.setFont('Courier');
+        // doc.setFontStyle('bold');
+        // doc.setFontSize(20);
+        // doc.text('Controle de Ponto', 105, 20, null, null, 'center');
+        // doc.line(78, 24, 133, 24);
+        //
+        // doc.setFontSize(12);
+        // doc.text('Data', 15, 40);
+        // doc.text('Entrada', 43, 40);
+        // doc.text('Almoço', 65, 40);
+        // doc.text('Retorno', 83, 40);
+        // doc.text('Saída', 103, 40);
+        // doc.text('Observação', 120, 40);
+        //
+        // doc.line(15, 42, 140, 42);
+        //
+        // const controlesRev = this.controles.reverse();
+        //
+        // let y = 47;
+        // controlesRev.forEach(controle => {
+        //     const observacao = !controle.observacao ? '' : controle.observacao;
+        //     doc.text(this.formatData(controle.data), 15, y);
+        //     doc.text(`${controle.hrEntrada}`, 44, y);
+        //     doc.text(`${controle.hrAlmocoSaida}`, 66, y);
+        //     doc.text(`${controle.hrAlmocoRetorno}`, 84, y);
+        //     doc.text(`${controle.hrSaida}`, 103, y);
+        //     doc.text(observacao, 120, y);
+        //     y += 7;
+        // });
+        //
+        // doc.output('dataurlnewwindow');
     }
 
     private formatData(data: any): string {

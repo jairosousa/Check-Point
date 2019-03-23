@@ -1,6 +1,7 @@
 package br.com.jns.checkpoint.web.rest;
 
 import br.com.jns.checkpoint.repository.filter.ControleFilter;
+import br.com.jns.checkpoint.util.GeneratePdfReport;
 import com.codahale.metrics.annotation.Timed;
 import br.com.jns.checkpoint.service.ControleService;
 import br.com.jns.checkpoint.web.rest.errors.BadRequestAlertException;
@@ -10,14 +11,18 @@ import br.com.jns.checkpoint.service.dto.ControleDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -153,6 +158,22 @@ public class ControleResource {
         Page<ControleDTO> page = controleService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/controles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/controles/pdfreport", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> gerarPdf(ControleFilter filter) throws IOException {
+        List<ControleDTO> controles = controleService.findControle(filter);
+        controles.forEach(System.out::println);
+        ByteArrayInputStream bis = GeneratePdfReport.controlesReport(controles);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=controlesreport.pdf");
+
+        return ResponseEntity
+            .ok()
+            .headers(headers)
+            .contentType(MediaType.APPLICATION_PDF)
+            .body(new InputStreamResource(bis));
     }
 
 }

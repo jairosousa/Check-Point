@@ -6,6 +6,7 @@ import br.com.jns.checkpoint.service.dto.ControleDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -56,4 +57,6 @@ public interface ControleService {
     Page<ControleDTO> search(String query, Pageable pageable);
 
     Page<ControleDTO> filtrar(ControleFilter filter, Pageable pageable);
+
+    List<ControleDTO> findControle(ControleFilter filter);
 }

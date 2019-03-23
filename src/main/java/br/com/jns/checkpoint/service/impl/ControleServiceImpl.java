@@ -14,7 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -115,5 +118,12 @@ public class ControleServiceImpl implements ControleService {
     public Page<ControleDTO> filtrar(ControleFilter filter, Pageable pageable) {
         return controleRepository.filtrar(filter, pageable)
             .map(controleMapper::toDto);
+    }
+
+    @Override
+    public List<ControleDTO> findControle(ControleFilter filter) {
+        return controleRepository.findGerarPdf(filter).stream()
+            .map(controleMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 }
