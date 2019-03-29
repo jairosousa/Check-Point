@@ -52,11 +52,9 @@ export class ControleService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
-    queryPdf(filtro?: ControleFiltro): Observable<EntityArrayResponseType> {
+    queryPdf(filtro?: ControleFiltro): Observable<any> {
         const options = createRequestOption(null, filtro);
-        return this.http
-            .get<IControle[]>(`${this.resourceUrl}/pdfreport`, { params: options, observe: 'response' })
-            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+        return this.http.get<any>(`${this.resourceUrl}/pdfreport`, { params: options }).pipe(map(res => res, { type: 'application/pdf' }));
     }
 
     delete(id: number): Observable<HttpResponse<any>> {

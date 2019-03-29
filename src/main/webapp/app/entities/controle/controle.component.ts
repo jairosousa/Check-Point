@@ -190,13 +190,10 @@ export class ControleComponent implements OnInit, OnDestroy {
     }
 
     gerarPDF() {
-        this.controleService
-            .queryPdf(this.filtro)
-            .subscribe(
-                (res: HttpResponse<IControle[]>) => this.paginateControles(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        return;
+        this.controleService.queryPdf(this.filtro).subscribe(res => {
+            var fileURL = URL.createObjectURL(res);
+            window.open(fileURL);
+        });
 
         // const doc = new jsPDF();
         // doc.setProperties({
