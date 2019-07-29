@@ -8,6 +8,7 @@ export interface IControle {
     hrAlmocoRetorno?: string;
     hrSaida?: string;
     corPulseira?: string;
+    bancoHora?: string;
     observacao?: string;
 }
 
@@ -20,6 +21,7 @@ export class Controle implements IControle {
         public hrAlmocoRetorno?: string,
         public hrSaida?: string,
         public corPulseira?: string,
+        public bancoHora?: string,
         public observacao?: string
     ) {}
 }

@@ -10,7 +10,6 @@ import { AccountService } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { ControleFiltro, ControleService } from './controle.service';
 
-import * as jsPDF from 'jspdf';
 import { faFilePdf, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
@@ -178,6 +177,7 @@ export class ControleComponent implements OnInit, OnDestroy {
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.controles = data;
+        console.log(this.controles);
     }
 
     protected onError(errorMessage: string) {
@@ -187,49 +187,6 @@ export class ControleComponent implements OnInit, OnDestroy {
     clean(editForm: NgForm) {
         editForm.resetForm();
         this.loadAll();
-    }
-
-    gerarPDF() {
-        this.controleService.queryPdf(this.filtro).subscribe(res => {
-            var fileURL = URL.createObjectURL(res);
-            window.open(fileURL);
-        });
-
-        // const doc = new jsPDF();
-        // doc.setProperties({
-        //     title: 'controle-ponto'
-        // });
-        // doc.setFont('Courier');
-        // doc.setFontStyle('bold');
-        // doc.setFontSize(20);
-        // doc.text('Controle de Ponto', 105, 20, null, null, 'center');
-        // doc.line(78, 24, 133, 24);
-        //
-        // doc.setFontSize(12);
-        // doc.text('Data', 15, 40);
-        // doc.text('Entrada', 43, 40);
-        // doc.text('Almoço', 65, 40);
-        // doc.text('Retorno', 83, 40);
-        // doc.text('Saída', 103, 40);
-        // doc.text('Observação', 120, 40);
-        //
-        // doc.line(15, 42, 140, 42);
-        //
-        // const controlesRev = this.controles.reverse();
-        //
-        // let y = 47;
-        // controlesRev.forEach(controle => {
-        //     const observacao = !controle.observacao ? '' : controle.observacao;
-        //     doc.text(this.formatData(controle.data), 15, y);
-        //     doc.text(`${controle.hrEntrada}`, 44, y);
-        //     doc.text(`${controle.hrAlmocoSaida}`, 66, y);
-        //     doc.text(`${controle.hrAlmocoRetorno}`, 84, y);
-        //     doc.text(`${controle.hrSaida}`, 103, y);
-        //     doc.text(observacao, 120, y);
-        //     y += 7;
-        // });
-        //
-        // doc.output('dataurlnewwindow');
     }
 
     private formatData(data: any): string {

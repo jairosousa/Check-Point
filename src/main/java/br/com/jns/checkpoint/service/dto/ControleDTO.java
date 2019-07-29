@@ -3,6 +3,9 @@ package br.com.jns.checkpoint.service.dto;
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 /**
@@ -90,6 +93,25 @@ public class ControleDTO implements Serializable {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public String getBancoHora() {
+        long intervalo = ChronoUnit.MINUTES.between(getHora(hrAlmocoSaida), getHora(hrAlmocoRetorno));
+        long periodo = ChronoUnit.MINUTES.between(getHora(hrEntrada), getHora(hrSaida));
+
+        long minExcedida = periodo - intervalo - 480;
+        long minutos = minExcedida % 60;
+        long horas = ((minExcedida - minutos) / 60);
+
+//        return entrada.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+        return (minExcedida > 15) ? horas + ":" + minutos : "";
+    }
+
+    private LocalTime getHora(String hora) {
+        int hr = Integer.parseInt(hora.substring(0, 2));
+        int min = Integer.parseInt(hora.substring(3, 5));
+        return LocalTime.of(hr, min);
     }
 
     @Override

@@ -109,13 +109,6 @@
                         <fa-icon [icon]="undo"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="entity.action.limpar">Save</span>
                     </button>
 
-                    <button type="button"
-                            (click)="gerarPDF()"
-                            class="btn btn-danger">
-                        <fa-icon [icon]="pdf"></fa-icon>
-                        <span class="d-none d-md-inline" jhiTranslate="entity.action.pdf">pdf</span>
-                    </button>
-
                 </div>
             </form>
         </div>
@@ -148,6 +141,9 @@
                 <th jhiSortBy="corPulseira" class="text-center"><span jhiTranslate="checkpointApp.controle.corPulseira">Cor Pulseira</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
+                <th jhiSortBy="bancoHora" class="text-center"><span jhiTranslate="checkpointApp.controle.bancoHora">Banco</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
                 <th jhiSortBy="observacao"><span jhiTranslate="checkpointApp.controle.observacao">Observacao</span>
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
@@ -169,6 +165,7 @@
                 <td class="text-center">
                     <div class="box" [ngStyle]="{'background-color': controle.corPulseira}"></div>
                 </td>
+                <td class="text-center">{{controle.bancoHora}}</td>
                 <td>{{controle.observacao}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
